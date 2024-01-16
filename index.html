@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<script src="my_tetris.js"></script>
+	</link>
+	<title>TETRIS 3.1</title>
+</head>
+
+<body>
+
+	<!-- DEVELOPER MODE ON:
+	<button id="c1">clear1</button>
+	<button id="c2">clear2</button>
+	<button id="c3">clear3</button>
+	<button id="c4">clear4</button>
+	<button id="stressBTN">stress check</button>
+	<button id="wipeBTN">wipe</button>
+	<button id="shuffleBtn">Shuffle</button>
+	<button id="holdBtn">Hold</button> -->
+
+	<div class="os-window">
+
+
+
+		<div class="window-title-bar">
+			<div class="thirds">
+				<div class="window-buttons-L">
+					<div class="window-button">
+						<div class="shadow-line"></div>
+					</div>
+				</div>
+				<div class="window-title">
+					Designed by ESQVR
+				</div>
+				<div class="window-buttons-R">
+					<div class="window-button">
+						<div class="pyramid-down"></div>
+					</div>
+					<div class="window-button">
+						<div class="pyramid-up"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="menu-bar">
+			<div class="menu-item">
+				<span class="menu-item-first-letter">F</span>ile
+				<div class="file-dropdown">
+					<div id="newgamebutton" class="dropdown-item">New Game</div>
+				</div>
+			</div>
+			<div class="menu-item">
+				<span class="menu-item-first-letter">O</span>ptions
+				<div class="edit-dropdown">
+					<div id="toggleSoundButton" class="dropdown-item">Mute All Sounds</div>
+					<div id="toggleGhostButton" class="dropdown-item">Disable Ghost</div>
+					<div id="toggleScrollButton" class="dropdown-item">Stop Wallpaper Scroll</div>
+					<div id="charSelect" class="dropdown-item">Character Select</div>
+				</div>
+			</div>
+			<div id="help-menu" class="menu-item">
+				<span class="menu-item-first-letter">H</span>elp
+			</div>
+		</div>
+
+
+		<div class="container">
+
+
+			<div id="popup-container" class="hidden-popup">
+				<div id="popup-content">
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">
+								SELECT CHARACTER
+							</div>
+							<div class="window-buttons-R">
+							</div>
+						</div>
+					</div>
+					<div class="castlist">
+						<div>
+							<img src="images/sprites/Dude/Dude_Monster.png" alt="Image 1" class="cast" id="dudebtn">
+						</div>
+						<div>
+							<img src="images/sprites/Owlet/Owlet_Monster.png" alt="Image 2" class="cast" id="owletbtn">
+						</div>
+						<div>
+							<img src="images/sprites/Pink/Pink_Monster.png" alt="Image 3" class="cast" id="pinkbtn">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="popup-score" class="hidden-popup">
+				<div id="endwindow">
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">
+								GAME OVER
+							</div>
+							<div class="window-buttons-R">
+							</div>
+						</div>
+					</div>
+					<div>
+						<img src="images/TetGameOver.png">
+					</div>
+					<div>Final Score: <span id="endscore"> 0</span></div>
+					<div>Highest Level: <span id="endlevel"> 0</span></div>
+				</div>
+			</div>
+
+			<div id="help-container" class="help-popup">
+				<div id="help-content">
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">
+								CONTROLS AND GAMEPLAY
+							</div>
+							<div class="window-buttons-R">
+							</div>
+						</div>
+					</div>
+					<table class="tetris-controls">
+						<thead>
+							<tr>
+								<th>Action</th>
+								<th>Keyboard Key</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Move Left</td>
+								<td>Left Arrow</td>
+							</tr>
+							<tr>
+								<td>Move Right</td>
+								<td>Right Arrow</td>
+							</tr>
+							<tr>
+								<td>Rotate Clockwise</td>
+								<td>Up Arrow</td>
+							</tr>
+							<tr>
+								<td>Soft Drop</td>
+								<td>Down Arrow</td>
+							</tr>
+							<tr>
+								<td>Hard Drop</td>
+								<td>Spacebar</td>
+							</tr>
+							<tr>
+								<td>Hold/Swap</td>
+								<td>Shift</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+
+			<div class="left-column">
+
+				<div class="legal-window">
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">
+								Credits / Legal
+							</div>
+							<div class="window-buttons-R">
+								<div class="window-button">
+									<div class="pyramid-down"></div>
+								</div>
+								<div class="window-button">
+									<div class="pyramid-up"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="logo-box">
+						<img src="images/tetris-logo.png" alt="Tetris Logo" width="150" height="100">
+					</div>
+
+					<div class="credits">
+						Tetris © 1985-2024 Tetris Holding. Tetris logos, Tetris theme song and Tetriminos are
+						trademarks
+						of Tetris Holding. The Tetris trade dress is owned by Tetris Holding. Licensed to The Tetris
+						Company. Tetris Game Design by Alexey Pajitnov. Tetris Logo Design by Roger Dean. All Rights
+						Reserved.<br><br>
+						Character Designs by CraftPix.net<br>
+						Theme (Korobeiniki 3.1) produced by ESQVR.
+					</div>
+
+				</div>
+
+				<div class="stats-window">
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">
+								Statistics
+							</div>
+							<div class="window-buttons-R">
+								<div class="window-button">
+									<div class="pyramid-down"></div>
+								</div>
+								<div class="window-button">
+									<div class="pyramid-up"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="stats-content">
+						<div class="score-display">Score: <span id="score"> 0</span></div>
+						<div class="level-display">Level: <span id="level"> 0</span></div>
+						<div class="tet-counts">
+							<div class="tet-count-block">
+								<img src="images/tetpics/ipic.png" alt="i-tetromino" width="40%" height="50%">
+								<div class="tet-count-i">"I" Tetrominos: <span class="num-display" id="icount">0</span>
+								</div>
+							</div>
+							<div class="tet-count-block">
+								<img src="images/tetpics/opic.png" alt="o-tetromino" width="25%" height="25%">
+								<div class="tet-count-o">"O" Tetrominos: <span class="num-display" id="ocount">0</span>
+								</div>
+							</div>
+							<div class="tet-count-block">
+								<img src="images/tetpics/tpic.png" alt="t-tetromino" width="30%" height="30%">
+								<div class="tet-count">"T" Tetrominos: <span class="num-display" id="tcount">0</span>
+								</div>
+							</div>
+							<div class="tet-count-block">
+								<img src="images/tetpics/spc.png" alt="s-tetromino" width="30%" height="30%">
+								<div class="tet-count">"S" Tetrominos: <span class="num-display" id="scount">0</span>
+								</div>
+							</div>
+							<div class="tet-count-block">
+								<img src="images/tetpics/zpic.png" alt="z-tetromino" width="30%" height="30%">
+								<div class="tet-count">"Z" Tetrominos: <span class="num-display" id="zcount">0</span>
+								</div>
+							</div>
+							<div class="tet-count-block">
+								<img src="images/tetpics/jpic.png" alt="j-tetromino" width="30%" height="30%">
+								<div class="tet-count">"J" Tetrominos: <span class="num-display" id="jcount">0</span>
+								</div>
+							</div>
+							<div class="tet-count-block">
+								<img src="images/tetpics/lpic.png" alt="l-tetromino" width="30%" height="30%">
+								<div class="tet-count">"L" Tetrominos: <span class="num-display" id="lcount">0</span>
+								</div>
+							</div>
+						</div>
+						<div class="lines-cleared-display">Lines Cleared: <span id="lines">0</span>
+							<div class="animation">
+								<div class="character-pane">
+
+								</div>
+								<div class="animFX">
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div id="pauseLayer" class="hidden-popup">
+				<div id = "countdown" class="pause-text">PAUSED</div>
+
+			</div>
+
+			<div class="main-window">
+				<div class="window-title-bar">
+					<div class="thirds">
+						<div class="window-buttons-L">
+							<div class="window-button">
+								<div class="shadow-line"></div>
+							</div>
+						</div>
+						<div class="window-title">
+							Tetris 3.1
+						</div>
+						<div class="window-buttons-R">
+							<div class="window-button">
+								<div class="pyramid-down"></div>
+							</div>
+							<div class="window-button">
+								<div class="pyramid-up"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<div class="grid">
+
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div class="hidden"></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+					<div class="taken"></div>
+				</div>
+			</div>
+
+			<div class="right-column">
+
+				<div class="mini-window">
+
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">Next Up</div>
+							<div class="window-buttons-R">
+								<div class="window-button">
+									<div class="pyramid-down"></div>
+								</div>
+								<div class="window-button">
+									<div class="pyramid-up"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="mini-grid">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+				<div class="hold-window">
+
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">Hold box</div>
+							<div class="window-buttons-R">
+								<div class="window-button">
+									<div class="pyramid-down"></div>
+								</div>
+								<div class="window-button">
+									<div class="pyramid-up"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="hold-grid">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+				<div class="start-window">
+
+					<div class="window-title-bar">
+						<div class="thirds">
+							<div class="window-buttons-L">
+								<div class="window-button">
+									<div class="shadow-line"></div>
+								</div>
+							</div>
+							<div class="window-title">Controls</div>
+							<div class="window-buttons-R">
+								<div class="window-button">
+									<div class="pyramid-down"></div>
+								</div>
+								<div class="window-button">
+									<div class="pyramid-up"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="StartButton" class="StartButton">START GAME</div>
+
+					<div id="audio-display" class="options-display">Audio: ON</div>
+					<div id="ghost-display" class="options-display">Ghost: ON</div>
+					<div id="scroll-display" class="options-display">Scroll Wallpaper: ON</div>
+
+					<div id="player-container">
+						<audio id="musicPlayer" controls loop>
+						</audio>
+
+					</div>
+
+					<canvas id="frequencyVisualizer"></canvas>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+# Visual Studio Code settings
+.vscode/
+
+# Ignore log files
+*.log
+
+# Ignore test files
+test/

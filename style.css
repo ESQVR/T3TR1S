@@ -1,0 +1,729 @@
+@font-face {
+	font-family: 'WinThreeOne';
+	src: url('fonts/w95fa.woff2') format('woff2'),
+		url('fonts/w95fa.woff') format('woff');
+
+}
+
+@keyframes scrollBackground {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 400px 400px;
+	}
+}
+
+#musicPlayer{
+	display: none;
+}
+
+canvas {
+	width: 100%;
+	height: 55px;
+	background-color: #000;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+.hidden-popup {
+    display: none;
+}
+
+#pauseLayer {
+	font-size: 80px;
+	color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 600px;
+	margin-left: 324px;
+	margin-top: 35px;
+	background-color: rgba(0, 0, 0, 0.9);
+	display: flex;
+	flex-direction: column; /* Stack children in a column layout */
+	align-items: flex-start; /* Center the children horizontally */
+	justify-content: center;
+	text-align: center; /* Center text within the container */
+	z-index: 1000;
+  }
+
+  .pause-text {
+	font-size: 80px;
+	margin-left:15px;
+	text-align: center;
+  }
+
+#popup-score {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	z-index: 2000;
+}
+
+/* Styles for the game over screen */
+#endwindow {
+	font-style: italic;
+	font-size: 30px;
+	color: red;
+	align-items: center;
+	text-align: center;
+	background-color: lightgray;
+    padding: 20px;
+	padding: 4px;
+	padding-bottom: 10px;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+}
+
+/* Styles for the pop-up container */
+#popup-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	z-index: 2000;
+}
+
+/* Styles for the pop-up content */
+#popup-content {
+    background-color: #fff;
+    padding: 4px;
+	padding: 4px;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+}
+
+.help-popup {
+    display: none;
+}
+
+/* Styles for the help container */
+#help-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	z-index: 1001;
+}
+
+/* Styles for the help content */
+#help-content {
+    background-color: #fff;
+    padding: 4px;
+	padding: 4px;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+	font-size: 14px;
+}
+
+
+body {
+	font-family: 'WinThreeOne', sans-serif;
+	font-size: 14px;
+	font-smooth: never;
+	-webkit-font-smoothing: none;
+	background-color: teal;
+	position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.os-window {
+	padding: 4px;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+	display: flex;
+	flex-direction: column;
+	font-size: 11px;
+	width: fit-content;
+	height: 750px;
+	position: relative;
+}
+
+.container {
+	display: flex;
+	background-image: url('backgrounds/0.png');
+	background-repeat: repeat;
+	background-size: 400px;
+	width: 800px;
+	height: 900px;
+	animation: scrollBackground 10s linear infinite;
+	position: relative;
+}
+
+.grid {
+	position: relative;
+	width: 300px;
+	height: 600px;
+	background-color: rgb(100, 100, 100);
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 300px;
+	min-height: 600px;
+}
+
+.container .main-window {
+	margin-top: 10px;
+	max-height: 620px;
+	margin-left: 20px;
+	padding: 4px;
+	background-color: black;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+}
+
+.stats-window {
+	height: fit-content;
+	background-color: lightgray;
+	margin-left: 60px;
+	margin-top: 10px;
+	padding: 4px;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+}
+
+.left-column {
+	display: flex;
+	flex-wrap: wrap;
+	width: 300px;
+	height: 600px;
+}
+
+.legal-window {
+	margin-top: 20px;
+	height: fit-content;
+	width: 100%;
+	background-color: lightgray;
+	margin-left: 20px;
+	padding: 4px;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.credits {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 11px;
+	text-align: center;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.logo-box {
+	margin-top: 10px;
+}
+
+.stats-content {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-left: 15px;
+	width: 210px;
+	height: fit-content;
+	color: red;
+	/* text-wrap: nowrap; */
+}
+
+.num-display {
+	justify-content: right;
+}
+
+.tet-counts {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	display: flex;
+	flex-direction: column;
+}
+
+.tet-count-block {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 30px;
+}
+
+.tet-count {
+	margin-top: 11px;
+	text-align: center;
+	margin-left: 10px;
+	color: black
+}
+
+.tet-count-o {
+	margin-top: 15px;
+	text-align: center;
+	margin-left: 10px;
+	color: black
+}
+
+.tet-count-i {
+	margin-top: 7px;
+	text-align: center;
+	margin-left: 10px;
+	color: black
+}
+
+.lines-cleared-display {
+	display: flex;
+	justify-content: space-around;
+	text-wrap: nowrap;
+}
+
+.num-display {
+	color: red;
+	margin-left: 5px;
+}
+
+.grid div {
+	height: 30px;
+	width: 30px;
+}
+
+.window-title-bar {
+	display: flex;
+	background-color: darkblue;
+	border-bottom: 1px solid black;
+	height: 20px;
+	width: 100%;
+	text-wrap: nowrap;
+
+}
+
+.score-display {
+	font-size: 30px;
+}
+
+.mini-grid {
+	width: 120px;
+	height: 120px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.mini-window {
+	margin-top: 60px;
+	margin-left: 20px;
+	width: 120px;
+	height: 150px;
+	padding: 4px;
+	background-image: url("/images/ChevBack.png");
+	background-size: 150px;
+	background-repeat: no-repeat;
+	background-position: 4px 10px;
+
+	background-color: black;
+	box-shadow:
+		inset 0 0 0 1px black,
+		inset 0 0 0 3px lightgrey,
+		inset 0 0 0 4px black;
+}
+
+.mini-window .window-title {
+	width: 50px;
+}
+
+.mini-window .window-buttons-L {
+	width: max-content;
+}
+
+.mini-window .window-buttons-R {
+	width: max-content;
+}
+
+.mini-grid div {
+	height: 30px;
+	width: 30px;
+}
+
+.hold-grid {
+	width: 120px;
+	height: 120px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.hold-window {
+	margin-top: 30px;
+	margin-left: 20px;
+	width: 120px;
+	height: 150px;
+	padding: 4px;
+	background-color: darkgoldenrod;
+	background-image: url("images/pixel_box_isolated_dither.png");
+	background-size: 100px;
+	background-repeat: no-repeat;
+	background-position: 15px 120px;
+	box-shadow: inset 0 0 0 1px black, inset 0 0 0 3px lightgrey, inset 0 0 0 4px black;
+}
+
+.hold-window .window-title {
+	width: 50px;
+}
+
+.hold-window .window-buttons-L {
+	width: max-content;
+}
+
+.hold-window .window-buttons-R {
+	width: max-content;
+}
+
+.hold-grid div {
+	height: 30px;
+	width: 30px;
+}
+
+.character-pane {
+	width: 32px;
+	height: 32px;
+	animation: idle 500ms steps(4) infinite;
+	background-image: url("images/sprites/Dude/Dude_Monster_Idle_4.png");
+	scale: 2;
+	margin-left: 35px;
+	margin-right: 5px;
+	margin-bottom: 16px;
+	justify-content: left;
+	position: relative;
+	z-index: 2000;
+}
+
+@keyframes idle {
+	from {
+		background-position: 128px 0;
+	}
+
+	to {
+		background-position: 0 0;
+	}
+}
+
+.window-title {
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
+	padding-top: 2px;
+	text-align: center;
+	text-wrap: nowrap;
+	margin-top: 2px;
+}
+
+.thirds {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.window-buttons-L {
+	display: flex;
+	align-items: center;
+	width: 33%;
+}
+
+.window-buttons-R {
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	width: 33%;
+}
+
+.pyramid-up {
+	margin-top: 6px;
+	margin-left: 6px;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 6px solid black;
+}
+
+.pyramid-down {
+	margin-top: 7px;
+	margin-left: 6px;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 6px solid black;
+}
+
+.shadow-line {
+	display: flex;
+	width: 11px;
+	height: 2px;
+	background: white;
+	border: 1px solid black;
+	margin-left: 3px;
+	margin-top: 7px;
+	box-shadow: 1px 1px 2px rgb(53, 53, 53);
+}
+
+.window-button {
+	width: 20px;
+	height: 20px;
+	background-color: #ccc;
+}
+
+.window-buttons-R .window-button {
+	width: 20px;
+	height: 20px;
+	background-color: #ccc;
+	border: 1px solid #000000;
+	box-shadow:
+		2px 2px rgba(255, 255, 255) inset,
+		-2px -2px rgb(138, 138, 138) inset;
+}
+
+.grid .hidden {
+	order: -1;
+	/* Move .hidden divs to the beginning (above the background) */
+	height: 0;
+	/* Hide the divs below the background */
+	width: 0;
+	margin: 0;
+}
+
+.tetromino {
+	box-shadow:
+		-3px -3px 0px rgba(0, 0, 0, 0.5) inset,
+		3px 3px 0px rgba(255, 255, 255, 0.5) inset,
+		5px 5px 10px rgba(0, 0, 0, 0.5)
+}
+
+.ghost {
+	border-radius: 8px;
+}
+
+.ghost[style*="color: cyan"] {
+	box-shadow: 0 0 5px cyan inset, 0 0 10px cyan inset, 0 0 5px cyan, 0 0 5px cyan;
+}
+
+.ghost[style*="color: yellow"] {
+	box-shadow: 0 0 5px yellow inset, 0 0 10px yellow inset, 0 0 5px yellow, 0 0 5px yellow;
+}
+
+.ghost[style*="color: magenta"] {
+	box-shadow: 0 0 5px magenta inset, 0 0 10px magenta inset, 0 0 5px magenta, 0 0 5px magenta;
+}
+
+.ghost[style*="color: lime"] {
+	box-shadow: 0 0 5px lime inset, 0 0 10px lime inset, 0 0 5px lime, 0 0 5px lime;
+}
+
+.ghost[style*="color: red"] {
+	box-shadow: 0 0 5px red inset, 0 0 10px red inset, 0 0 5px red, 0 0 5px red;
+}
+
+.ghost[style*="color: blue"] {
+	box-shadow: 0 0 5px blue inset, 0 0 10px blue inset, 0 0 5px blue, 0 0 5px blue;
+}
+
+.ghost[style*="color: orange"] {
+	box-shadow: 0 0 5px orange inset, 0 0 10px orange inset, 0 0 5px orange, 0 0 5px orange;
+}
+
+.menu-bar {
+	background-color: #ffffff;
+	/* Windows 3.1 menu color */
+	display: flex;
+	z-index: 1;
+	border-bottom: 1px solid black;
+}
+
+.menu-item {
+	padding: 2px 10px;
+	color: #000000;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bolder;
+}
+
+.menu-item:hover {
+	background-color: darkblue;
+	color: white;
+}
+
+.dropdown {
+	position: absolute;
+	top: 43px;
+	left: 4px;
+	background-color: rgb(255, 255, 255);
+	display: none;
+	z-index: 2;
+
+}
+
+.file-dropdown {
+	position: absolute;
+	top: 43px;
+	left: 3px;
+	background-color: rgb(255, 255, 255);
+	display: none;
+	z-index: 2;
+	border: 1px solid #000;
+}
+
+.edit-dropdown {
+	position: absolute;
+	top: 43px;
+	left: 44px;
+	background-color: rgb(255, 255, 255);
+	display: none;
+	z-index: 2;
+	border: 1px solid #000;
+}
+
+.file-dropdown .dropdown-item,
+.edit-dropdown .dropdown-item {
+	padding: 4px 20px;
+	color: #000000;
+	cursor: pointer;
+	text-align: left;
+}
+
+.file-dropdown .dropdown-item {
+	padding-right: 50px;
+}
+
+
+.dropdown-item:hover {
+	background-color: darkblue;
+	color: white;
+	/* Highlight on hover */
+}
+
+.menu-item .menu-item-first-letter {
+	text-decoration: underline;
+}
+
+.start-window {
+	margin-top: 40px;
+	margin-left: 10px;
+	width: 140px;
+	height: fit-content;
+	padding: 4px;
+	background-color: black;
+	box-shadow: inset 0 0 0 1px black, inset 0 0 0 3px lightgrey, inset 0 0 0 4px black;
+	color: red;
+	font-size: 14px;
+	text-align: left;
+}
+
+.start-window .window-title {
+	width: 100px;
+}
+
+.start-window .window-buttons-L {
+	width: max-content;
+}
+
+.StartButton {
+	display: block;
+	width: 138px;
+	height: 21px;
+	background-color: #ccc;
+	border: 1px solid #999;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	box-shadow:
+		2px 2px rgba(255, 255, 255) inset,
+		-2px -2px rgb(138, 138, 138) inset;
+	color: #000000;
+	font-size: 16px;
+	font-weight: bolder;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	padding-top: 8px;
+	padding-bottom: 2px;
+}
+
+.StartButton:hover {
+	background-color: #ffffff;
+}
+
+.options-display {
+	padding-top: 4px;
+	padding-left: 4px;
+	padding-bottom: 0px;
+	color: lime;
+}
+
+.castlist {
+	display: flex;
+	background-color: linen;
+
+}
+
+.castlist .cast {
+	height: 80px;
+}
+
+.cast:hover {
+	background-color: aquamarine;
+}
+
+/* CSS for Help Menu */
+.tetris-controls {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 16px;
+  }
+
+  .tetris-controls th,
+  .tetris-controls td {
+	padding: 10px 20px;
+	text-align: center;
+	border: 1px solid #ccc;
+  }
+
+  .tetris-controls th {
+	background-color: #333;
+	color: #fff;
+  }
+
+  .tetris-controls tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+  }
+
+  .tetris-controls tbody tr:hover {
+	background-color: #ddd;
+  }
